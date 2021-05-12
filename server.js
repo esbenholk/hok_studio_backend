@@ -15,9 +15,11 @@ app.get('/api/getallimages', async (req, res)=>{
         'folder:contentRedistribution' // add your folder
         ).sort_by('public_id','desc').max_results(99).execute()
 
-    const publicUrls = resources.map((file)=> file.url);
+    const publicUrls = await resources.map((file)=> file.url);
 
-    res.send(publicUrls);
+    console.log(publicUrls);
+
+    res.json({images: publicUrls});
 
 })
 app.post('/api/upload', async (req, res)=>{
